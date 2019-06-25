@@ -2,20 +2,17 @@
  * i2c.cpp - send and recieve bytes on an I2C bus
  *
  * Copyright 2019 T Glyn Thomas (glyn@tgtsystems.com)
- *
  */
 
 #include <stdio.h>
-//#include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
-//#include <errno.h>
-//#include <string.h>
 #include <pthread.h>
 #include <sys/ioctl.h>
 #include <linux/i2c-dev.h>
 
 #include "i2c.h"
+
 
 static const char fname[] = "/dev/i2c-1";	// I2C device path
 static int fd = 0;				    // I2C file descriptor
@@ -40,7 +37,6 @@ int send_byte(unsigned char i2c_addr, const unsigned char &c)
     ioctl(fd, I2C_SLAVE, i2c_addr);
 
     // send one byte, range [0,255]
-    //printf("address %x sending: %d \n", i2c_addr, c);
     int rc = write(fd, &c, 1);
 
     pthread_mutex_unlock(&mutex_i2c);
@@ -71,7 +67,6 @@ int send_bytes(unsigned char i2c_addr, unsigned char buff[], int nbytes)
     ioctl(fd, I2C_SLAVE, i2c_addr);
 
     // send one byte, range [0,255]
-    //printf("address %x sending: %d \n", i2c_addr, c);
     int rc = write(fd, buff, nbytes);
 
     pthread_mutex_unlock(&mutex_i2c);
@@ -112,25 +107,4 @@ int read_bytes(unsigned char i2c_addr, unsigned char buff[], int nbytes)
     }
     return (rc);
 }
-
-
-#ifdef TEST_MOTOR
-int main(int argc, char *argv[])
-{
-    int i2c_addr = 0x2c;
-
-    for (int i = 20; i < 255; i++) {
-        unsigned char c = i;
-        send_byte(i2c_addr, c);
-        usleep(10000);
-    }
-
-    for (int i = 255; i >= 20; i--) {
-        unsigned char c =  i;
-        send_byte(i2c_addr, c);
-        usleep(10000);
-    }
-    return (0);
-}
-#endif /* TEST_MOTORR */
 
