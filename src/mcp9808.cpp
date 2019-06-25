@@ -129,7 +129,6 @@ double read_temp()
 int main() {
     
     // measure temperature
-    // g++ src/mcp9808.cpp src/i2c.cpp
 
     //std::cout << "i2c address = " << i2c_addr << std::endl;
     printf("i2c address = 0x%x\n", i2c_addr);
