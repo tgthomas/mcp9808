@@ -1,4 +1,5 @@
-MCP9808 temerature sensor  
+MCP9808 temperature sensor  
 
 Compile:  
-    g++ src/mcp9808.cpp src/i2c.cpp  
+    cd src  
+    g++ mcp9808.cpp i2c.cpp  
