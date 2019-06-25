@@ -8,7 +8,7 @@
 #define _I2C_H_
 
 // I2C bus
-int send_byte(unsigned char i2c_addr, unsigned char c);
+int send_byte(unsigned char i2c_addr, const unsigned char &c);
 int send_bytes(unsigned char i2c_addr, unsigned char buff[], int nbytes);
 int read_bytes(unsigned char i2c_addr, unsigned char buff[], int nbytes);
 

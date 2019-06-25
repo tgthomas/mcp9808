@@ -126,17 +126,19 @@ double read_temp()
 }
 
 
-
-
-
 int main() {
+    
+    // measure temperature
+    // g++ src/mcp9808.cpp src/i2c.cpp
 
     //std::cout << "i2c address = " << i2c_addr << std::endl;
     printf("i2c address = 0x%x\n", i2c_addr);
 
-    unsigned char res = 0x03;
+    // resolution
+    unsigned char res = RES_0625;
     set_resolution(res);
 
+    // read the temperature
     int n_ave = 1;              // average over n seconds
     while (true) {
         double temp = 0;

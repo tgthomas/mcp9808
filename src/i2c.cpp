@@ -23,7 +23,7 @@ static pthread_mutex_t mutex_i2c;   // IMU mutex, serialize access to I2C bus
 
 
 // send_byte - send a single byte to a device
-int send_byte(unsigned char i2c_addr, unsigned char c)
+int send_byte(unsigned char i2c_addr, const unsigned char &c)
 {
     // open device file on first use
     if (fd == 0) {
@@ -132,5 +132,5 @@ int main(int argc, char *argv[])
     }
     return (0);
 }
-#endif /* TEST_MOTOR */
+#endif /* TEST_MOTORR */
 
